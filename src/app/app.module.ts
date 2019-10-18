@@ -5,26 +5,44 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { TaskListPage } from '../pages/tasklist/tasklist';
+
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { Dialogs } from '@ionic-native/dialogs';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyBbbxeVTIdiZOhWY290mtepXlzX2ad6rA4",
+  authDomain: "ionic2do-62a10.firebaseapp.com",
+  databaseURL: "https://ionic2do-62a10.firebaseio.com",
+  projectId: "ionic2do-62a10",
+  storageBucket: "ionic2do-62a10.appspot.com",
+  messagingSenderId: "760775273457"
+};
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    TaskListPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    TaskListPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Dialogs,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }
